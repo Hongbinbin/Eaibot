@@ -1,0 +1,5 @@
+<launch>
+  <!-- <node pkg="dashgo_sendcoordinate" type="send_goal_test" name="sendGoal_test" output="screen"></node> -->
+  <node pkg="neo_driver" type="mix" name="mix" output="screen"></node>
+  <node pkg="dashgo_sendcoordinate" type="order_goal_test" name="orderGoal_test" output="screen"></node>
+</launch>

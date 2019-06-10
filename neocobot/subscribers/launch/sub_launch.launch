@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="subscribers" type="arm_status_sub" name="armstatussub" output="screen">
+  </node>
+</launch>
