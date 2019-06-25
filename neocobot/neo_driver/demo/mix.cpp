@@ -176,7 +176,7 @@ int main(int argc, char **argv)
 
             if(msg_str == GOHOME)
             {
-                msg_str = "GO HOME NOW....\n";
+                msg_str = "GO HOME NOW.....\n";
                 
                 arrive_position = setGoal(home);
 
