@@ -9,7 +9,7 @@
   <include file="$(find neo_description)/launch/omni_6_launch/omni_6_upload.launch"/>
 
   <include file="$(find dashgo_description)/launch/dashgo_description.launch"/>
-  <arg name="map_file" default="$(find dashgo_nav)/maps/sslab335_eai001_20190602.yaml"/>
+  <arg name="map_file" default="$(find dashgo_nav)/maps/sslab335_eai001_20190626.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
   <arg name="initial_pose_x" default="0.0"/> 
   <arg name="initial_pose_y" default="0.0"/> 
