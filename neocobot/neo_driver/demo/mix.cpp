@@ -17,6 +17,7 @@
 
 // Meaningless definitions
 #define GOHOME "HOME"
+#define GOHOME_2 "HOME2"
 #define GOGOAL1 "GOAL1"
 #define GOGOAL2 "GOAL2"
 #define GOGOAL3 "GOAL3"
@@ -60,6 +61,7 @@ typedef struct _POSE
 
 // Set coordinates of the space for N1
 POSE home = {0.198950537479, -0.0506683966777, 0.138, 0.0, 0.0, 0.0145251092119, 0.999894505037};
+POSE home2 = {0.136499346146, 0.0263122121675, 0.138, 0.0, 0.0, -9.27490156775e-05, 0.999999995699};
 
 /* FOR TEST */
 POSE goal1 = {-1.60594665031, -1.61384410883, 0.138, 0.0, 0.0, -0.6645250777, 0.747265964104};
@@ -180,6 +182,12 @@ int main(int argc, char **argv)
                 msg_str = "GO HOME NOW...\n";
                 
                 arrive_position = setGoal(home);
+
+            }
+            else  if(msg_str == GOHOME_2)
+            {
+                arrive_position = setGoal(home2);
+                msg_str = "GO HOME 2 NOW...\n";
 
             }
             else  if(msg_str == GOGOAL1)
