@@ -60,21 +60,22 @@ typedef struct _POSE
 // END For N1
 
 // Set coordinates of the space for N1
-POSE home = {0.198950537479, -0.0506683966777, 0.138, 0.0, 0.0, 0.0145251092119, 0.999894505037};
+POSE home = {0.155291183046, 0.0224557849882, 0.138, 0.0, 0.0, 0.0023300333415, 0.999997285469};
+// POSE home2 = {0.198950537479, -0.0506683966777, 0.138, 0.0, 0.0, 0.0145251092119, 0.999894505037};
 POSE home2 = {0.136499346146, 0.0263122121675, 0.138, 0.0, 0.0, -9.27490156775e-05, 0.999999995699};
 
 /* FOR TEST */
-POSE goal1 = {-1.60594665031, -1.61384410883, 0.138, 0.0, 0.0, -0.6645250777, 0.747265964104};
-POSE goal2 = {0, 0, 0, 0, 0, 0, 0};
-POSE goal3 = {-3.72713303134, 1.11758145534, 0.138, 0.0, 0.0, 0.67681465113, 0.736153467706};
-POSE goal4 = {-3.29754103329, 1.8297248201, 0.138, 0.0, 0.0, 0.999998940386, 0.00145575619787};
+POSE goal1 = {-1.95041619662, -1.67914130716, 0.138, 0.0, 0.0, -0.630874536165, 0.775884862346};
+POSE goal2 = {-1.23942170791, -2.28984167099, 0.138, 0.0, 0.0, 0.999965090489, 0.00835570486025};
+POSE goal3 = {-3.87707724345, 1.06660806001, 0.138, 0.0, 0.0, 0.69997039453, 0.714171860816};
+POSE goal4 = {-3.30805927756, 1.60481908878, 0.138, 0.0, 0.0, 0.994780727248, -0.102035801049};
 // POSE goalx = {0, 0, 0, 0, 0, 0, 0};
 
 /* My goals for use */
-POSE goal1_1 = {-1.60594665031, -1.61384410883, 0.138, 0.0, 0.0, -0.6645250777, 0.747265964104};
-POSE goal1_2 = {0, 0, 0, 0, 0, 0, 0};
-POSE goal2_1 = {-3.72713303134, 1.11758145534, 0.138, 0.0, 0.0, 0.67681465113, 0.736153467706};
-POSE goal2_2 = {-3.29754103329, 1.8297248201, 0.138, 0.0, 0.0, 0.999998940386, 0.00145575619787};
+POSE goal1_1 = {-1.95041619662, -1.67914130716, 0.138, 0.0, 0.0, -0.630874536165, 0.775884862346};
+POSE goal1_2 = {-1.23942170791, -2.28984167099, 0.138, 0.0, 0.0, 0.999965090489, 0.00835570486025};
+POSE goal2_1 = {-3.87707724345, 1.06660806001, 0.138, 0.0, 0.0, 0.69997039453, 0.714171860816};
+POSE goal2_2 = {-3.30805927756, 1.60481908878, 0.138, 0.0, 0.0, 0.994780727248, -0.102035801049};
 
 // Won't use this
 POSE takemeal ={0, 0, 0, 0, 0, 0, 0};
@@ -114,7 +115,8 @@ string setGoal(POSE pose)
       
     if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){  
        ROS_INFO("ROS_ERROR: It is successful\n");
-       printf("It is successful\n");   
+       printf("It is successful!\n");   
+       printf("NEXT COMMAND PLEASE (HOME, COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y): \n");
        return "t";
     }else{  
        ROS_ERROR("ROS_ERROR: The base failed move to goal!!!\n");
@@ -214,7 +216,6 @@ int main(int argc, char **argv)
                 msg_str = "COLLECT FROM GOAL 1-1 NOW....\n";
                 arrive_position = setGoal(goal1_1);
                 
-                ros::Duration(3).sleep(); // sleep for 3 seconds
                 // Pose 1 - READY POSE
 		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
                 MoveToPose_msg.request.pose.x = 218.761261;
@@ -362,7 +363,6 @@ int main(int argc, char **argv)
 
                 // END: Movements for OMNI6
 
-                printf("NEXT COMMAND PLEASE (HOME, COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y): \n");
             }
             else  if(msg_str == COLLECT_FROM_GOAL_1_2)                       // COLLECT FROM GOAL 1-2
             {
@@ -373,7 +373,6 @@ int main(int argc, char **argv)
                 msg_str = "COLLECT FROM GOAL 1-2 NOW....\n";
                 arrive_position = setGoal(goal1_2);
                 
-                ros::Duration(3).sleep(); // sleep for 3 seconds
                 // Pose 1 - READY POSE
 		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
                 MoveToPose_msg.request.pose.x = 218.761261;
@@ -520,8 +519,7 @@ int main(int argc, char **argv)
                 printf("Position 5 arrived. FOLD.\n");
 
                 // END: Movements for OMNI6
-
-                printf("NEXT COMMAND PLEASE (HOME, COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y): \n");
+                
             }
             else  if(msg_str == COLLECT_FROM_GOAL_2_1)                       // COLLECT FROM GOAL 2-1
             {
@@ -532,7 +530,6 @@ int main(int argc, char **argv)
                 msg_str = "COLLECT FROM GOAL 2-1 NOW....\n";
                 arrive_position = setGoal(goal2_1);
                 
-                ros::Duration(3).sleep(); // sleep for 3 seconds
                 // Pose 1 - READY POSE
 		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
                 MoveToPose_msg.request.pose.x = 218.761261;
@@ -680,7 +677,6 @@ int main(int argc, char **argv)
 
                 // END: Movements for OMNI6
 
-                printf("NEXT COMMAND PLEASE (HOME, COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y): \n");
             }
             else  if(msg_str == COLLECT_FROM_GOAL_2_2)                       // COLLECT FROM GOAL 2-2
             {
@@ -691,7 +687,6 @@ int main(int argc, char **argv)
                 msg_str = "COLLECT FROM GOAL 2-2 NOW....\n";
                 arrive_position = setGoal(goal2_2);
                 
-                ros::Duration(3).sleep(); // sleep for 3 seconds
                 // Pose 1 - READY POSE
 		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
                 MoveToPose_msg.request.pose.x = 218.761261;
@@ -838,24 +833,677 @@ int main(int argc, char **argv)
                 printf("Position 5 arrived. FOLD.\n");
 
                 // END: Movements for OMNI6
+            }
+            else  if(msg_str == TAKE_TO_GOAL_1_1)                       // TAKE TO GOAL 1-1     // TAKE TO GOAL 1-1
+            {
+                // START: Movements for OMNI6
+                // START: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
 
-                printf("NEXT COMMAND PLEASE (HOME, COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y): \n");
-            }
-            else  if(msg_str == TAKE_TO_GOAL_1_1)                       // TAKE TO GOAL 1-1
-            {
-                
-            }
-            else  if(msg_str == TAKE_TO_GOAL_1_2)                       // TAKE TO GOAL 1-2
-            {
-                
-            }
-            else  if(msg_str == TAKE_TO_GOAL_2_1)                       // TAKE TO GOAL 2-1
-            {
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE\n");
 
+		        // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+                // Pose 2 - MOVE FORWARD
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,20,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.895905;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 596.250977;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -0.004195;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+	        	// Pose 3 - TAKE IT UP
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,16,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.622009;
+                MoveToPose_msg.request.pose.y = 0.003249;
+                MoveToPose_msg.request.pose.z = 603.329041;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = 4.000833;
+                MoveToPose_msg.request.pose.Rz = -0.000439;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 4 - Go back to READY POSE
+		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 4 arrived. READY POSE\n");
+
+                // Pose 5 - FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 5 arrived. FOLD.\n");
+                // END: Movements for OMNI6
+
+
+                // DESTINATION - TAKE TO WHICH TABLE
+                msg_str = "TAKE TO GOAL 1-1 NOW....\n";
+                arrive_position = setGoal(goal1_1);
+
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE. \n");
+
+                // Pose 2 - MOVE FORWARD
+		        // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,22,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.096863;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 592.753113;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.000385;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 2-1 - Put it down briefly on customers' table
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,23,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.014374;
+                MoveToPose_msg.request.pose.y = -0.004955;
+                MoveToPose_msg.request.pose.z = 590.994080;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -3.000082;
+                MoveToPose_msg.request.pose.Rz = 0.000879;
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,24,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.906708;
+                MoveToPose_msg.request.pose.y = -0.008668;
+                MoveToPose_msg.request.pose.z = 589.234253;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.000278;
+                MoveToPose_msg.request.pose.Rz = 0.001538;
+
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,25,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.768524;
+                MoveToPose_msg.request.pose.y = 0.037134;
+                MoveToPose_msg.request.pose.z = 587.478149;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.999594;
+                MoveToPose_msg.request.pose.Rz = -0.006592;
+
+                // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+
+                // Pose 3 - Go back to READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 3 arrived. READY POSE. \n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+                // Pose 4- FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                printf("Position 4 arrived. FOLD.\n");
+                client1.call(MoveToPose_msg);
+
+                // END: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // GO HOME
+                arrive_position = setGoal(home);
             }
-            else  if(msg_str == TAKE_TO_GOAL_2_2)                       // TAKE TO GOAL 2-2
+            else  if(msg_str == TAKE_TO_GOAL_1_2)                       // TAKE TO GOAL 1-2      // TAKE TO GOAL 1-2
             {
-                
+                // START: Movements for OMNI6
+                // START: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // Just to make sure the machine is at home.
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE\n");
+
+		        // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+                // Pose 2 - MOVE FORWARD
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,20,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.895905;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 596.250977;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -0.004195;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+	        	// Pose 3 - TAKE IT UP
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,16,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.622009;
+                MoveToPose_msg.request.pose.y = 0.003249;
+                MoveToPose_msg.request.pose.z = 603.329041;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = 4.000833;
+                MoveToPose_msg.request.pose.Rz = -0.000439;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 4 - Go back to READY POSE
+		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 4 arrived. READY POSE\n");
+
+                // Pose 5 - FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 5 arrived. FOLD.\n");
+                // END: Movements for OMNI6
+
+
+                // DESTINATION - TAKE TO WHICH TABLE
+                msg_str = "TAKE TO GOAL 1-2 NOW....\n";
+                arrive_position = setGoal(goal1_2);
+
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE. \n");
+
+                // Pose 2 - MOVE FORWARD
+		        // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,22,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.096863;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 592.753113;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.000385;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 2-1 - Put it down briefly on customers' table
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,23,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.014374;
+                MoveToPose_msg.request.pose.y = -0.004955;
+                MoveToPose_msg.request.pose.z = 590.994080;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -3.000082;
+                MoveToPose_msg.request.pose.Rz = 0.000879;
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,24,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.906708;
+                MoveToPose_msg.request.pose.y = -0.008668;
+                MoveToPose_msg.request.pose.z = 589.234253;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.000278;
+                MoveToPose_msg.request.pose.Rz = 0.001538;
+
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,25,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.768524;
+                MoveToPose_msg.request.pose.y = 0.037134;
+                MoveToPose_msg.request.pose.z = 587.478149;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.999594;
+                MoveToPose_msg.request.pose.Rz = -0.006592;
+
+                // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+
+                // Pose 3 - Go back to READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 3 arrived. READY POSE. \n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+                // Pose 4- FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                printf("Position 4 arrived. FOLD.\n");
+                client1.call(MoveToPose_msg);
+
+                // END: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // GO HOME
+                arrive_position = setGoal(home);
+            }
+            else  if(msg_str == TAKE_TO_GOAL_2_1)                       // TAKE TO GOAL 2-1     // TAKE TO GOAL 2-1
+            {
+                // START: Movements for OMNI6
+                // START: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // Just to make sure the machine is at home.
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE\n");
+
+		        // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+                // Pose 2 - MOVE FORWARD
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,20,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.895905;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 596.250977;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -0.004195;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+	        	// Pose 3 - TAKE IT UP
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,16,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.622009;
+                MoveToPose_msg.request.pose.y = 0.003249;
+                MoveToPose_msg.request.pose.z = 603.329041;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = 4.000833;
+                MoveToPose_msg.request.pose.Rz = -0.000439;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 4 - Go back to READY POSE
+		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 4 arrived. READY POSE\n");
+
+                // Pose 5 - FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 5 arrived. FOLD.\n");
+                // END: Movements for OMNI6
+
+
+                // DESTINATION - TAKE TO WHICH TABLE
+                msg_str = "TAKE TO GOAL 2-1 NOW....\n";
+                arrive_position = setGoal(goal2_1);
+
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE. \n");
+
+                // Pose 2 - MOVE FORWARD
+		        // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,22,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.096863;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 592.753113;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.000385;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 2-1 - Put it down briefly on customers' table
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,23,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.014374;
+                MoveToPose_msg.request.pose.y = -0.004955;
+                MoveToPose_msg.request.pose.z = 590.994080;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -3.000082;
+                MoveToPose_msg.request.pose.Rz = 0.000879;
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,24,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.906708;
+                MoveToPose_msg.request.pose.y = -0.008668;
+                MoveToPose_msg.request.pose.z = 589.234253;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.000278;
+                MoveToPose_msg.request.pose.Rz = 0.001538;
+
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,25,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.768524;
+                MoveToPose_msg.request.pose.y = 0.037134;
+                MoveToPose_msg.request.pose.z = 587.478149;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.999594;
+                MoveToPose_msg.request.pose.Rz = -0.006592;
+
+                // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+
+                // Pose 3 - Go back to READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 3 arrived. READY POSE. \n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+                // Pose 4- FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                printf("Position 4 arrived. FOLD.\n");
+                client1.call(MoveToPose_msg);
+
+                // END: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // GO HOME
+                arrive_position = setGoal(home);
+            }
+            else  if(msg_str == TAKE_TO_GOAL_2_2)                       // TAKE TO GOAL 2-2     // TAKE TO GOAL 2-2
+            {
+                // START: Movements for OMNI6
+                // START: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // Just to make sure the machine is at home.
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE\n");
+
+		        // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+                // Pose 2 - MOVE FORWARD
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,20,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.895905;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 596.250977;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -0.004195;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+	        	// Pose 3 - TAKE IT UP
+                // move_to_angles [1,2,3,4,5,6] [0,10,60,0,16,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 423.622009;
+                MoveToPose_msg.request.pose.y = 0.003249;
+                MoveToPose_msg.request.pose.z = 603.329041;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = 4.000833;
+                MoveToPose_msg.request.pose.Rz = -0.000439;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 4 - Go back to READY POSE
+		        // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 4 arrived. READY POSE\n");
+
+                // Pose 5 - FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 5 arrived. FOLD.\n");
+                // END: Movements for OMNI6
+
+
+                // DESTINATION - TAKE TO WHICH TABLE
+                msg_str = "TAKE TO GOAL 2-2 NOW....\n";
+                arrive_position = setGoal(goal2_2);
+
+
+                // Pose 1 - READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 1 arrived. READY POSE. \n");
+
+                // Pose 2 - MOVE FORWARD
+		        // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,22,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.096863;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 592.753113;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.000385;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 2 arrived. MOVE FORWARD.\n");
+
+                // Pose 2-1 - Put it down briefly on customers' table
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,23,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 323.014374;
+                MoveToPose_msg.request.pose.y = -0.004955;
+                MoveToPose_msg.request.pose.z = 590.994080;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -3.000082;
+                MoveToPose_msg.request.pose.Rz = 0.000879;
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,24,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.906708;
+                MoveToPose_msg.request.pose.y = -0.008668;
+                MoveToPose_msg.request.pose.z = 589.234253;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.000278;
+                MoveToPose_msg.request.pose.Rz = 0.001538;
+
+
+                // move_to_angles [1,2,3,4,5,6] [0,-10,80,0,25,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 322.768524;
+                MoveToPose_msg.request.pose.y = 0.037134;
+                MoveToPose_msg.request.pose.z = 587.478149;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -4.999594;
+                MoveToPose_msg.request.pose.Rz = -0.006592;
+
+                // Gripper OPENED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "open";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper opened! \n");
+
+
+                // Pose 3 - Go back to READY POSE
+                // move_to_angles [1,2,3,4,5,6] [0,-30,95,0,27,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = 218.761261;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 581.685608;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -1.998999;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                client1.call(MoveToPose_msg);
+                printf("Position 3 arrived. READY POSE. \n");
+
+                // Gripper CLOSED
+                SetEOATAction_msg.request.name = "Gripper";
+                SetEOATAction_msg.request.action = "close";
+                gripper_client.call(SetEOATAction_msg);
+                printf("Gripper closed, item grabbed! \n");
+
+                // Pose 4- FOLD
+		        // move_to_angles [1,2,3,4,5,6] [0,-90,105,0,77,0] 10 60 0 0
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.x = -113.988853;
+                MoveToPose_msg.request.pose.y = 0.000000;
+                MoveToPose_msg.request.pose.z = 488.099701;
+                MoveToPose_msg.request.pose.Rx = -180.000000;
+                MoveToPose_msg.request.pose.Ry = -2.003237;
+                MoveToPose_msg.request.pose.Rz = 0.000000;
+                printf("Position 4 arrived. FOLD.\n");
+                client1.call(MoveToPose_msg);
+
+                // END: HERE GOES THE MOVEMENTS FOR TAKE ITEMS TO CUSTOMERS' TABLE
+                // GO HOME
+                arrive_position = setGoal(home);
             }
             // else  if(msg_str == TAKEMEAL)
             // {

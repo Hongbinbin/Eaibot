@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     * This is a message object. You stuff it with data, and then publish it.
     */
     std::string inputString;
-    std::cout << "Give input (HOME, goal1COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y)" << std::endl;
+    std::cout << "Give input (HOME, COLLECT_FROM_GOAL_x_y, TAKE_TO_GOAL_x_y):" << std::endl;
     std::getline(std::cin, inputString);
     std_msgs::String msg; 
 
