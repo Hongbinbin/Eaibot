@@ -98,7 +98,6 @@ string setGoal(POSE pose)
     //we'll send a goal to the robot to move 1 meter forward  
     goal.target_pose.header.frame_id = "map";  
     goal.target_pose.header.stamp = ros::Time::now();  
-   
     goal.target_pose.pose.position.x = pose.X; 
     goal.target_pose.pose.position.y = pose.Y;  
     goal.target_pose.pose.position.z = pose.Z;   

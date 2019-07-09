@@ -44,14 +44,14 @@ void currentCallback(const neo_msgs::JointCurrent::ConstPtr& msg)
 void poseCallback(const neo_msgs::EndPose::ConstPtr& msg)
 {
   printf("Pose:\n x: %f\n y: %f\n z: %f\n Rx: %f\n Ry: %f\n Rz: %f \n", msg->x, msg->y, msg->z, msg->Rx, msg->Ry, msg->Rz);
-	printf("========== For copy and paste: ========== \n");
-	printf("MoveToPose_msg.request.pose.x = %f;\n", msg->x);
-	printf("MoveToPose_msg.request.pose.y = %f;\n", msg->y);
-	printf("MoveToPose_msg.request.pose.z = %f;\n", msg->z);
-	printf("MoveToPose_msg.request.pose.Rx = %f;\n", msg->Rx);
-	printf("MoveToPose_msg.request.pose.Ry = %f;\n", msg->Ry);
-	printf("MoveToPose_msg.request.pose.Rz = %f;\n", msg->Rz);
-  printf("==============================\n");
+// 	printf("========== For copy and paste: ========== \n");
+// 	printf("MoveToPose_msg.request.pose.x = %f;\n", msg->x);
+// 	printf("MoveToPose_msg.request.pose.y = %f;\n", msg->y);
+// 	printf("MoveToPose_msg.request.pose.z = %f;\n", msg->z);
+// 	printf("MoveToPose_msg.request.pose.Rx = %f;\n", msg->Rx);
+// 	printf("MoveToPose_msg.request.pose.Ry = %f;\n", msg->Ry);
+// 	printf("MoveToPose_msg.request.pose.Rz = %f;\n", msg->Rz);
+//   printf("==============================\n");
 }
 
 
