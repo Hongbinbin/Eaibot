@@ -11,11 +11,11 @@
   <!-- arm -->
   <xacro:omni_6_robot joint_limited="True"/>
 
-  <link name="world" />
+  <link name="base_footprint" />
 
   <joint name="world_joint" type="fixed">
-    <parent link="world" />
-    <child link = "base_link" />
+    <parent link="base_footprint" />
+    <child link = "base1_link" />
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 -1.57" />
   </joint>
 

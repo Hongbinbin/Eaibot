@@ -15,7 +15,7 @@
 #include <iostream>
 #include <std_msgs/String.h>
 
-// Meaningless definitions
+// Initial definitions
 #define GOHOME "HOME"
 #define GOHOME_2 "HOME2"
 #define GOGOAL1 "GOAL1"
@@ -23,6 +23,12 @@
 #define GOGOAL3 "GOAL3"
 #define GOGOAL4 "GOAL4"
 #define TAKEMEAL "TAKE"
+
+// Single points only
+#define GOAL1_1 "GOAL1_1"
+#define GOAL1_2 "GOAL1_2"
+#define GOAL2_1 "GOAL2_1"
+#define GOAL2_2 "GOAL2_2"
 
 // Collect the meal
 #define COLLECT_FROM_GOAL_1_1 "COLLECT_FROM_GOAL_1_1"
@@ -71,6 +77,7 @@ POSE goal3 = {-3.87707724345, 1.06660806001, 0.138, 0.0, 0.0, 0.69997039453, 0.7
 POSE goal4 = {-3.30805927756, 1.60481908878, 0.138, 0.0, 0.0, 0.994780727248, -0.102035801049};
 // POSE goalx = {0, 0, 0, 0, 0, 0, 0};
 
+
 /* My goals for use */
 POSE goal1_1 = {-1.95041619662, -1.67914130716, 0.138, 0.0, 0.0, -0.630874536165, 0.775884862346};
 POSE goal1_2 = {-1.23942170791, -2.28984167099, 0.138, 0.0, 0.0, 0.999965090489, 0.00835570486025};
@@ -113,11 +120,11 @@ string setGoal(POSE pose)
     ac.waitForResult();  
       
     if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){  
-       ROS_INFO("ROS_ERROR: It is successful\n");
+    //    ROS_INFO("ROS_ERROR: It is successful\n");
        printf("It is successful!\n");
        return "t";
     }else{  
-       ROS_ERROR("ROS_ERROR: The base failed move to goal!!!\n");
+    //    ROS_ERROR("ROS_ERROR: The base failed move to goal!!!\n");
        printf("The base failed move to goal!!!\n");  
        return "u";
     }   
@@ -204,6 +211,26 @@ int main(int argc, char **argv)
             {
                 msg_str = "Test: GET TO GOAL 4 NOW....\n";
                 arrive_position = setGoal(goal4);
+            }
+            else  if(msg_str == GOAL1_1)
+            {
+                msg_str = "Test: GET TO GOAL 1_1 NOW....\n";
+                arrive_position = setGoal(goal1_1);
+            }
+            else  if(msg_str == GOAL1_2)
+            {
+                msg_str = "Test: GET TO GOAL 1_2 NOW....\n";
+                arrive_position = setGoal(goal1_2);
+            }
+            else  if(msg_str == GOAL2_1)
+            {
+                msg_str = "Test: GET TO GOAL 2_1 NOW....\n";
+                arrive_position = setGoal(goal2_1);
+            }
+            else  if(msg_str == GOAL2_2)
+            {
+                msg_str = "Test: GET TO GOAL 2_2 NOW....\n";
+                arrive_position = setGoal(goal2_2);
             }
             else  if(msg_str == COLLECT_FROM_GOAL_1_1)                       // COLLECT FROM GOAL 1-1
             {

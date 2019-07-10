@@ -15,7 +15,7 @@
      sixth_lower_limit:=${-8.0*pi/9.0}      sixth_upper_limit:=${8.0*pi/9.0}">
      
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-    <link name="base_link" >
+    <link name="base1_link" >
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
@@ -42,7 +42,7 @@
     
 <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <joint name="first_joint" type="revolute">
-      <parent link="base_link" />
+      <parent link="base1_link" />
       <child link = "first_link" />
       <origin xyz="0 0 0.1565" rpy="-5.8488E-31 0 0" />
       <axis xyz="0 0 1" />
